@@ -1,0 +1,257 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.max-width {
+  max-width: 100%;
+  padding: 0px 80px;
+  /* margin: auto; */
+}
+
+/* navbar styling */
+
+.navbar-nb {
+  position: fixed;
+  width: 100%;
+  padding: 20px 0;
+  font-family: 'Ubuntu', 'sans-serif';
+  transition: all 0.3s;
+  z-index: 999;
+}
+
+.navbar-nb.sticky-nb {
+  background: #149BD2;
+  padding: 4px 0;
+}
+
+.navbar-nb .max-width {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-nb .max-width .logo {
+  align-items: center;
+}
+
+.navbar-nb .logo a {
+  color: #fff;
+  font-size: 35px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navbar-nb .logo a span {
+  color: #149BD2;
+  transition: all 0.3s;
+}
+
+.navbar-nb.sticky-nb .logo a span {
+  color: #fff;
+}
+
+.navbar-nb li {
+  list-style: none;
+  display: inline-block;
+}
+
+.navbar-nb .menu li a {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  margin-left: 25px;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+
+.navbar-nb .menu li a:hover {
+  color: crimson;
+}
+
+/* home styling */
+
+.landing-page {
+  display: flex;
+  background: url('./assets/landing-page.jpg') center;
+  height: 100vh;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+  min-height: 500px;
+  font-family: 'Ubuntu', 'sans-serif';
+}
+
+.landing-page .max-width {
+  margin: auto 0 auto 40px;
+}
+
+.landing-page .landing-page-content .text-1 {
+  font-size: 21px;
+}
+
+.landing-page .landing-page-content .text-2 {
+  font-size: 75px;
+  font-weight: 500;
+  margin-left: -3px;
+}
+
+.landing-page .landing-page-content .text-3 {
+  font-size: 40px;
+  /* margin: 5px 0; */
+}
+
+.landing-page .landing-page-content .text-3 span {
+  color: #149BD2;
+  font-weight: 500;
+}
+
+.landing-page .landing-page-content a {
+  display: inline-block;
+  background: #149BD2;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 6px;
+  font-size: 20px;
+  margin-top: 20px;
+  border: 2px solid #149BD2;
+  transition: all 0.3s;
+}
+
+.landing-page .landing-page-content a:hover {
+  background: none;
+  color: #149BD2;
+  text-decoration: none;
+}
+
+/* footer styling */
+
+footer {
+	background-color: rgba(0, 0, 0, 0.9);
+  padding: 25px;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+footer .footer-bawah {
+	width: 100%;
+	font-size: 13px;
+	color: #fff;
+}
+
+
+/* Contact Card styling */
+
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+#team {
+    background: #eee !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #149BD2;
+    border-color: #149BD2;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #149BD2;
+    border-color: #149BD2;
+}
+
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #149BD2;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+#team .card {
+    border: none;
+    background: #ffffff;
+}
+
+.mainflip {
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.frontside {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 30px;
+}
+
+.backside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+    -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+}
+
+.frontside,
+.backside {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transition: 1s;
+    -moz-transform-style: preserve-3d;
+    -o-transition: 1s;
+    -o-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+}
+
+.frontside .card,
+.backside .card {
+    min-height: 325px;
+}
+
+.backside .card a {
+    font-size: 18px;
+    color: #149BD2 !important;
+}
+
+.frontside .card .card-title,
+.backside .card .card-title {
+    color: #149BD2 !important;
+}
+
+.frontside .card .card-body img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
