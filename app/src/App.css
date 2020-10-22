@@ -75,6 +75,12 @@ html {
   color: crimson;
 }
 
+.menu-btn {
+  color: #fff;
+  cursor: pointer;
+  font-size: 23px;
+  display: none;
+}
 /* home styling */
 
 .landing-page {
@@ -97,13 +103,13 @@ html {
 }
 
 .landing-page .landing-page-content .text-2 {
-  font-size: 75px;
+  font-size: 70px;
   font-weight: 500;
   margin-left: -3px;
 }
 
 .landing-page .landing-page-content .text-3 {
-  font-size: 40px;
+  font-size: 30px;
   /* margin: 5px 0; */
 }
 
@@ -112,7 +118,7 @@ html {
   font-weight: 500;
 }
 
-.landing-page .landing-page-content a {
+.landing-page .landing-page-content button {
   display: inline-block;
   background: #149BD2;
   color: #fff;
@@ -124,7 +130,7 @@ html {
   transition: all 0.3s;
 }
 
-.landing-page .landing-page-content a:hover {
+.landing-page .landing-page-content button:hover {
   background: none;
   color: #149BD2;
   text-decoration: none;
@@ -168,11 +174,11 @@ footer .footer-bawah {
     border-color: #149BD2;
 }
 
-section {
+.team-contact {
     padding: 60px 0;
 }
 
-section .section-title {
+.team-contact .team-contact-title {
     text-align: center;
     color: #149BD2;
     margin-bottom: 50px;
@@ -254,4 +260,49 @@ section .section-title {
     width: 120px;
     height: 120px;
     border-radius: 50%;
+}
+
+@media (max-width: 600px) {
+  .landing-page .max-width {
+    margin-left: 0px;
+  }
+
+  .max-width {
+    padding: 0 27px;
+  }
+
+  .menu-btn {
+    display: block;
+    z-index: 999;
+  }
+
+  .menu-btn i.active:before {
+      content: "\f00d";
+  }
+
+  .navbar-nb .menu {
+      position: fixed;
+      background: #111;
+      left: -100%;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      text-align: center;
+      padding-top: 80px;
+      transition: all 0.3s;
+  }
+
+  .navbar-nb .menu.active {
+      left: 0;
+  }
+
+  .navbar-nb .menu li {
+      display: block;
+  }
+
+  .navbar-nb .menu li a {
+      display: inline-block;
+      margin: 20px 0;
+      font-size: 25px;
+  }
 }

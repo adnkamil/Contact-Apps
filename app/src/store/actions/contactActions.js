@@ -1,7 +1,10 @@
+import swal from 'sweetalert'
+import axios from 'axios'
 
 export function getContacts () {
+    let apiUrl = 'https://simple-contact-crud.herokuapp.com/contact'
     return (dispatch) => {
-        fetch('https://simple-contact-crud.herokuapp.com/contact/')
+        fetch(apiUrl)
             .then(res => res.json())
             .then(({data}) => {
                 dispatch({
@@ -20,31 +23,52 @@ export function editContact (editContact, id) {
     const updateAge = { ...editContact, age: +editContact.age}
     console.log(updateAge, '<<<<<<<')
     return (dispatch, getContact) => {
-        fetch(`https://simple-contact-crud.herokuapp.com/contact/${id}`, {
+        axios({
             method: 'PUT',
-            body: JSON.stringify(updateAge),
-            header: {'Content-Type': 'application/json'}
+            url: `https://simple-contact-crud.herokuapp.com/contact/${id}`,
+            headers: {"content-type": "application/json"},
+            data: updateAge
         })
-        .then(response => response.json())
-        .then(({data}) => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+            .then(res => swal('Uyeahhh', `${res.data.data.firstName} success edited`, 'success'))
+            .catch(err => {
+                switch (err.response.data.validation.keys[0]) {
+                    case ('firstName'):
+                        swal('Opsss', 'First Name is empty or less than 3 characters', 'error')
+                        break;
+                    case ('lastName'):
+                        swal('Opsss', 'Last Name is empty or less than 3 characters', 'error')
+                        break;
+                    default:
+                        swal('Opsss', 'age must be between 1 and 200', 'error')
+                        break;
+                }
+            })
     }
 }
 
 export function createContact (newContact) {
     console.log('masuk action createContact')
     return (dispatch) => {
-        fetch('https://simple-contact-crud.herokuapp.com/contact', {
+        axios({
             method: 'POST',
-            body: JSON.stringify(newContact),
-            headers: {
-                "content-type": "application/json"
-              },
+            url: 'https://simple-contact-crud.herokuapp.com/contact',
+            headers: {"content-type": "application/json"},
+            data: newContact
         })
+            .then(res => swal('Uyeahhh', res.data.message, 'success'))
+            .catch(err => {
+                switch (err.response.data.validation.keys[0]) {
+                    case ('firstName'):
+                        swal('Opsss', 'First Name is empty or less than 3 characters', 'error')
+                        break;
+                    case ('lastName'):
+                        swal('Opsss', 'Last Name is empty or less than 3 characters', 'error')
+                        break;
+                    default:
+                        swal('Opsss', 'age must be between 1 and 200', 'error')
+                        break;
+                }
+            })
     }
 }
 
@@ -66,5 +90,6 @@ export function deleteContact (id) {
                     }
                 })
             })
+            .catch(err => console.log('masuk error'))
     }
 }

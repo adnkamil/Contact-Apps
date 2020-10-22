@@ -4,6 +4,7 @@ import { getContacts } from '../store/actions/contactActions'
 import ContactCard from '../components/ContactCard'
 import { Modal, Button, Form } from 'react-bootstrap'
 import { createContact } from '../store/actions/contactActions'
+import Aos from 'aos'
 
 export default () => {
     const dispatch = useDispatch()
@@ -37,11 +38,15 @@ export default () => {
         dispatch(getContacts())
     }, [dispatch])
 
+    useEffect(() => {
+        Aos.init({ duration: 750 })
+    })
+
     return (
         <>
             <Modal show={showModal} onHide={handleShow} centered>
                 <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>New Contact</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={addContact}>
@@ -73,27 +78,28 @@ export default () => {
             </Modal>
             <div className="landing-page" id="landing-page">
                 <div className="max-width">
-                    <div className="landing-page-content">
+                    <div className="landing-page-content" data-aos="fade-up">
                         <div className="text-1">Hay buddy,</div>
-                        <div className="text-2">Adding your Network</div>
+                        <div className="text-2">Add your Network</div>
                         <div className="text-3">Because your Network is your <span>Net Worth</span></div>
-                        <Button variant="primary" onClick={handleShow}>
-                            Add Contact
-                        </Button>
+                        <Button variant="primary" onClick={handleShow}>Add Contact</Button>
                     </div>
                 </div>
             </div>
             <div className="contact" id="contact">
-                <section id="team" className="pb-5">
-                    <div className="container">
-                        <h5 className="section-title h1">MY CONTACT</h5>
+                <div id="team" className="pb-5 team-contact">
+                    <div className="container" data-aos="fade-up">
+                        <h5 className="team-contact-title h1">MY CONTACT</h5>
                         <div className="row">
-                            {contacts && contacts.map((contact) => {
+                            {contacts ? contacts.map(contact => {
                                 return <ContactCard key={contact.id} contact={contact} />
-                            })}
+                            }) :
+                            <div class="spinner-border text-info" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>}
                         </div>
                     </div>
-                </section>
+                </div>
             </div>
         </>
     )

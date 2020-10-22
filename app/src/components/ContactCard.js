@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
-import { editContact, getContacts } from '../store/actions/contactActions'
+import { editContact, getContacts, deleteContact } from '../store/actions/contactActions'
+import swal from 'sweetalert'
+import Aos from 'aos'
 
 export default (props) => {
     const dispatch = useDispatch()
@@ -15,8 +17,20 @@ export default (props) => {
     })
 
     const goDelete = () => {
-
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                dispatch(deleteContact(id))
+            } 
+          });
     }
+    
     const goEdit = () => {
         setIsFrontside(!isFrontside)
     }
@@ -27,10 +41,10 @@ export default (props) => {
         })
     }
 
-    const goEditContact = (e) => {
+    const goEditContact = async (e) => {
         e.preventDefault()
         dispatch(editContact(input, id))
-        dispatch(getContacts())
+        await dispatch(getContacts())
         goEdit()
     }
 
@@ -38,11 +52,15 @@ export default (props) => {
         setInput(props.contact)
     }, [props.contact])
 
+    useEffect(() => {
+        Aos.init({ duration: 750 })
+    })
+
     return (
-        <div className="col-xs-12 col-sm-6 col-md-4">
+        <div className="col-xs-12 col-sm-6 col-md-4" data-aos="fade-up">
             <div className="image-flip" >
-                <div className="mainflip flip-0">
-                    <div className={isFrontside ? "frontside" : "backside"}>
+                <div className="mainflip flip-0" >
+                    <div className={isFrontside ? "frontside" : "backside"} >
                         <div className="card">
                             <div className="card-body text-center">
                                 <p><img className=" img-fluid" src={photo} alt="" /></p>
