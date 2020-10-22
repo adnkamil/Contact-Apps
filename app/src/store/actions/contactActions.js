@@ -18,10 +18,8 @@ export function getContacts () {
 }
 
 export function editContact (editContact, id) {
-    console.log('masuk action createtask')
     delete editContact['id']
     const updateAge = { ...editContact, age: +editContact.age}
-    console.log(updateAge, '<<<<<<<')
     return (dispatch, getContact) => {
         axios({
             method: 'PUT',
@@ -29,7 +27,9 @@ export function editContact (editContact, id) {
             headers: {"content-type": "application/json"},
             data: updateAge
         })
-            .then(res => swal('Uyeahhh', `${res.data.data.firstName} success edited`, 'success'))
+            .then(res => {
+                swal('Uyeahhh', `${res.data.data.firstName} success edited`, 'success')
+            })
             .catch(err => {
                 switch (err.response.data.validation.keys[0]) {
                     case ('firstName'):
@@ -55,7 +55,15 @@ export function createContact (newContact) {
             headers: {"content-type": "application/json"},
             data: newContact
         })
-            .then(res => swal('Uyeahhh', res.data.message, 'success'))
+            .then(res => {
+                dispatch({
+                    type: 'ADD_CONTACT',
+                    payload: {
+                        contact: newContact
+                    }
+                })
+                swal('Uyeahhh', res.data.message, 'success')
+            })
             .catch(err => {
                 switch (err.response.data.validation.keys[0]) {
                     case ('firstName'):
@@ -73,7 +81,6 @@ export function createContact (newContact) {
 }
 
 export function deleteContact (id) {
-    console.log('masuk action createContact')
     return (dispatch) => {
         fetch(`https://simple-contact-crud.herokuapp.com/contact/${id}`, {
             method: 'DELETE',
@@ -81,14 +88,16 @@ export function deleteContact (id) {
                 "content-type": "application/json"
             },
         })
-            .then(res => res.json)
+            .then(res => res.json())
             .then(() => {
+                console.log('berhasil hapus')
                 dispatch({
                     type: 'DELETE_CONTACT',
                     payload: {
                         contactId: id
                     }
                 })
+                swal("Yeahh", 'Contact deleted', 'success')
             })
             .catch(err => console.log('masuk error'))
     }

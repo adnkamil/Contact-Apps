@@ -30,7 +30,7 @@ export default (props) => {
             } 
           });
     }
-    
+
     const goEdit = () => {
         setIsFrontside(!isFrontside)
     }
@@ -41,10 +41,10 @@ export default (props) => {
         })
     }
 
-    const goEditContact = async (e) => {
+    const goEditContact = (e) => {
         e.preventDefault()
         dispatch(editContact(input, id))
-        await dispatch(getContacts())
+        dispatch(getContacts())
         goEdit()
     }
 

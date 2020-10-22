@@ -27,10 +27,9 @@ export default () => {
           })
     }
 
-    const addContact = (e) => {
+    const addContact = async (e) => {
         e.preventDefault()
         dispatch(createContact(input))
-        getContacts()
         handleShow()
     }
 
@@ -44,7 +43,7 @@ export default () => {
 
     return (
         <>
-            <Modal show={showModal} onHide={handleShow} centered>
+            <Modal show={showModal} onHide={handleShow} centered >
                 <Modal.Header closeButton>
                 <Modal.Title>New Contact</Modal.Title>
                 </Modal.Header>
@@ -72,7 +71,7 @@ export default () => {
                         Close
                     </Button>
                     <Button variant="primary" onClick={addContact}>
-                        Save Changes
+                        Add Contact
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -89,7 +88,7 @@ export default () => {
             <div className="contact" id="contact">
                 <div id="team" className="pb-5 team-contact">
                     <div className="container" data-aos="fade-up">
-                        <h5 className="team-contact-title h1">MY CONTACT</h5>
+                        <h5 className="team-contact-title h1">MY CONTACTS</h5>
                         <div className="row">
                             {contacts ? contacts.map(contact => {
                                 return <ContactCard key={contact.id} contact={contact} />
